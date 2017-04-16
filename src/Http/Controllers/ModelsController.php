@@ -5,26 +5,29 @@ namespace Goszowski\Runsite\Http\Controllers;
 use Goszowski\Runsite\Http\Controllers\RunsiteController;
 use Goszowski\Runsite\Models\Model\Model;
 use Goszowski\Runsite\Helpers\Alert;
-use Goszowski\Runsite\Helpers\MigrationBuilder;
 use Illuminate\Http\Request;
+use Facades\ {
+  Goszowski\Runsite\Helpers\Html\PageBuilder,
+  Goszowski\Runsite\Helpers\Database\MigrationBuilder
+};
 
 class ModelsController extends RunsiteController
 {
     public function index()
     {
         $items = Model::paginate();
-        return view('runsite::models.index', compact('items'));
+        return PageBuilder::buildIndex(Model::class, $items);
     }
 
-    public function create(Model $model)
+    public function create()
     {
-        return view('runsite::models.create', compact('model'));
+        return PageBuilder::buildCreate(Model::class);
     }
 
     public function edit($id)
     {
         $model = Model::find($id);
-        return view('runsite::models.edit', compact('model'));
+        return PageBuilder::buildEdit($model);
     }
 
     public function show()
@@ -32,7 +35,7 @@ class ModelsController extends RunsiteController
         return abort(404);
     }
 
-    public function store(Request $request, MigrationBuilder $migrationBuilder)
+    public function store(Request $request)
     {
         $this->validate($request, [
           'name' => 'required|max:255|unique:rs_models',
@@ -41,8 +44,6 @@ class ModelsController extends RunsiteController
         ]);
 
         Model::create($request->all());
-
-        // $migrationBuilder->createTable(str_plural($request->input('name')));
 
         Alert::success(trans('runsite::main.created_successful'));
 
@@ -57,7 +58,10 @@ class ModelsController extends RunsiteController
           'display_name_plural' => 'required|max:255',
         ]);
 
-        Model::find($id)->update($request->all());
+        $model = Model::find($id);
+
+        $model->update($request->all());
+        // MigrationBuilder::updateModel($model->name, 'Goszowski\Runsite\Models\Model\Model', $request->all());
         Alert::success(trans('runsite::main.updated_successful'));
 
         return redirect()->route('runsite.models.index');
