@@ -6,7 +6,7 @@
         <form action="{{route('runsite.'.$model->modelName.'.store')}}" method="post" >
           {{csrf_field()}}
           @include('runsite::page-builder.form')
-          <button type="submit" class="btn btn-primary rippler rippler-default"><i class="fa fa-check"></i> {{trans('runsite::main.Create')}}</button>
+          <button type="submit" class="btn btn-primary rippler rippler-default"><i class="icofont icofont-check"></i> {{trans('runsite::main.Create')}}</button>
         </form>
       </div>
     </div>

@@ -1,0 +1,48 @@
+<?php
+
+// This migration was generated from Goszowski/Runsite package
+
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+use Goszowski\Runsite\Models\Field\Field;
+use Goszowski\Runsite\Models\Model\Model;
+
+class %%MigrationName%% extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        $model = Model::where('name', '%%ModelName%%')->first();
+
+        Field::create([
+          'model_id' => $model->id,
+          'type_id' => %%TypeId%%,
+          'name' => '%%FieldName%%',
+          'display_name' => '%%FieldDispayName%%',
+          'hint' => '%%FieldHint%%',
+        ], true);
+
+        Schema::table('%%TableName%%', function (Blueprint $table) {
+            $table->%%Field%%;
+            %%Index%%
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Field::where('name', '%%FieldName%%')->delete();
+        Schema::table('%%TableName%%', function (Blueprint $table) {
+            $table->dropColumn('%%FieldName%%');
+        });
+    }
+}

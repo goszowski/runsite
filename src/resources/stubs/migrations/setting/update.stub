@@ -1,0 +1,33 @@
+<?php
+
+// This migration was generated from Goszowski/Runsite package
+
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+use Goszowski\Runsite\Models\Model\Model;
+
+class %%MigrationName%% extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        $model = Model::where('name', '%%modelName%%')->first();
+        Setting::where('model_id', $model->id)->update([
+%%modelFields%%        ], true);
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+
+    }
+}

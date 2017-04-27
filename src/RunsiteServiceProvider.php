@@ -17,7 +17,14 @@ class RunsiteServiceProvider extends ServiceProvider
 
         $this->loadViewsFrom(__DIR__ . '/resources/views', 'runsite');
         $this->loadTranslationsFrom(__DIR__.'/resources/lang', 'runsite');
-        $router->middleware('runsite.auth', 'Goszowski\Runsite\Http\Middlewares\Authenticate');
+        $this->loadMigrationsFrom(__DIR__.'/resources/migrations');
+        $router->aliasMiddleware('runsite.auth', 'Goszowski\Runsite\Http\Middlewares\Authenticate');
+
+        $this->publishes([
+            __DIR__.'/resources/export/public' => public_path('vendor/runsite'),
+        ], 'runsite_public');
+
+        // config(['auth.providers.users.model' => \Goszowski\Runsite\Models\User\User::class]);
     }
 
     /**
@@ -32,7 +39,8 @@ class RunsiteServiceProvider extends ServiceProvider
         // });
 
         $this->commands([
-            Console\Setup::class,
+            Console\Setup\Setup::class,
+            Console\Model\Lists::class,
         ]);
     }
 }

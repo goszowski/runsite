@@ -20,12 +20,12 @@
       <div class="collapse navbar-collapse" id="top-nav">
 
         <ul class="nav navbar-nav">
-          <li class="active"><a href="#website" data-toggle="tab"><i class="fa fa-sitemap"></i> Tree</a></li>
-          <li><a href="#tools" data-toggle="tab"><i class="fa fa-cogs"></i> Tools</a></li>
+          <li class="active"><a href="#website" data-toggle="tab"><i class="icofont icofont-site-map"></i> Tree</a></li>
+          <li><a href="#tools" data-toggle="tab"><i class="icofont icofont-ui-settings"></i> Tools</a></li>
         </ul>
 
         <ul class="nav navbar-nav">
-          <li><a href="#tools"><i class="fa fa-share"></i> Go to website</a></li>
+          <li><a href="{{url('/')}}" target="_blank"><i class="icofont icofont-computer"></i> Open website</a></li>
         </ul>
 
         <div id="app-menu">
@@ -35,13 +35,13 @@
         <ul class="nav navbar-nav navbar-right">
           <li><a href="#">Link</a></li>
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="icofont icofont-ui-user"></i> Dropdown <span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li><a href="#">Action</a></li>
+              <li><a href="#"><i class="icofont icofont-settings"></i> Action</a></li>
               <li><a href="#">Another action</a></li>
               <li><a href="#">Something else here</a></li>
               <li role="separator" class="divider"></li>
-              <li><a href="#">Separated link</a></li>
+              <li><a href="#"><i class="icofont icofont-logout"></i> Separated link</a></li>
             </ul>
           </li>
         </ul>
@@ -60,22 +60,22 @@
                 <ul>
                   <li>
                     <span class="angle rippler rippler-inverse"><i class="fa fa-angle-right" aria-hidden="true"></i></span>
-                    <a href="#" class="rippler rippler-inverse"><i class="fa fa-folder"></i> Налаштування</a>
+                    <a href="#" class="rippler rippler-inverse"><i class="tree-icon icofont icofont-folder"></i> Налаштування</a>
                   </li>
                   <li>
                     <span class="angle rippler rippler-inverse"><i class="fa fa-angle-right" aria-hidden="true"></i></span>
-                    <a href="#" class="rippler rippler-inverse"><i class="fa fa-folder"></i> Статті</a>
+                    <a href="#" class="rippler rippler-inverse"><i class="tree-icon icofont icofont-folder"></i> Статті</a>
                   </li>
                   <li class="open">
                     <span class="angle rippler rippler-inverse"><i class="fa fa-angle-right" aria-hidden="true"></i></span>
-                    <a href="#" class="rippler rippler-inverse"><i class="fa fa-folder"></i> Новини</a>
+                    <a href="#" class="rippler rippler-inverse"><i class="tree-icon icofont icofont-ui-folder"></i> Новини</a>
                     <ul>
                       <li>
-                        <a href="#" class="rippler rippler-inverse"><i class="fa fa-file"></i> Коментарі</a>
+                        <a href="#" class="rippler rippler-inverse"><i class="tree-icon icofont icofont-archive"></i> Коментарі</a>
                       </li>
                       <li>
                         <span class="angle rippler rippler-inverse"><i class="fa fa-angle-right" aria-hidden="true"></i></span>
-                        <a href="#" class="rippler rippler-inverse"><i class="fa fa-file"></i> Автори</a>
+                        <a href="#" class="rippler rippler-inverse"><i class="tree-icon icofont icofont-users-alt-4"></i> Автори</a>
                       </li>
                     </ul>
                   </li>
@@ -268,7 +268,7 @@
           <nav class="tree">
             <ul>
               <li>
-                <a href="{{route('runsite.models.index')}}" target="runsiteIframe" class="rippler rippler-inverse"><i class="fa fa-cogs"></i> {{trans('runsite::model.app_name')}}</a>
+                <a href="{{route('runsite.models.index')}}" target="runsiteIframe" class="rippler rippler-inverse"><i class="icofont icofont-database"></i> {{trans('runsite::model.app_name')}}</a>
               </li>
               <li>
                 <a href="{{route('runsite.languages.index')}}" target="runsiteIframe" class="rippler rippler-inverse"><i class="fa fa-language"></i> {{trans('runsite::language.app_name')}}</a>

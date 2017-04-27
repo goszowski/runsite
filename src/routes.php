@@ -8,7 +8,7 @@ Route::group([
 ], function() {
 
   Route::group(['namespace' => 'Auth', 'prefix'=>'auth'], function() {
-    Route::get('login', ['as' => 'runsite.auth.login', 'uses' => 'LoginController@showLoginForm']);
+    Route::get('login', ['as' => 'auth.login', 'uses' => 'LoginController@showLoginForm']);
     Route::post('login', 'LoginController@login');
     Route::post('logout', 'LoginController@logout');
     Route::get('password/reset', 'ForgotPasswordController@showLinkRequestForm');
@@ -17,8 +17,8 @@ Route::group([
   });
 
 
-  // Route::group(['middleware' => 'runsite.auth'], function() {
-    // Main
+  Route::group(['middleware' => 'runsite.auth'], function() {
+    // Boot
     Route::get('/', ['as' => 'runsite', 'uses' => 'MainController@index']);
 
     Route::resource('models', 'ModelsController');
@@ -33,7 +33,7 @@ Route::group([
     //   Route::post('/',          ['as' => 'runsite.models.store',    'uses' => 'ModelsController@store']);
     //   Route::patch('/{id}',     ['as' => 'runsite.models.update',   'uses' => 'ModelsController@update']);
     //   Route::delete('/{id}',    ['as' => 'runsite.models.update',   'uses' => 'ModelsController@update']);
-    // });
+  });
 
 
   });

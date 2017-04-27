@@ -17,10 +17,14 @@ class CreateRsUsersTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('email')->unique();
-            $table->integer('group_id')->references('id')->on('groups');
+            $table->integer('group_id')->unsigned();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+
+            $table->foreign('group_id')
+              ->references('id')->on('rs_user_groups')
+              ->onDelete('cascade');
         });
     }
 

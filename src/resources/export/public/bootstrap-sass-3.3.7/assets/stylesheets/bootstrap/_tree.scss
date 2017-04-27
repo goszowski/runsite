@@ -1,0 +1,63 @@
+.tree {
+
+  padding: 0 20px;
+
+  ul {
+    margin: 0; padding: 0;
+    list-style-type: none;
+
+    li {
+      display: block;
+      position: relative;
+
+      & > .angle {
+        position: absolute;
+        top: 0; left: 0;
+        cursor: pointer;
+        display: inline-block;
+        padding: 0 5px;
+
+        &:hover {
+          background: rgba(0,0,0, 0.1);
+
+          i.fa {
+            color: darken(#777, 10%);
+          }
+        }
+      }
+
+      &.open > .angle {
+        i.fa {
+          transform: rotate(90deg);
+        }
+      }
+
+      a {
+        display: inline-block;
+        padding: 1px 2px;
+        color: #777;
+
+        i.fa {
+          margin-right: 2px;
+          color: darken(#777, 5%);
+        }
+
+        &:hover {
+          color: darken(#777, 10%);
+        }
+
+        &:hover, &:focus, &:active {
+          text-decoration: none;
+        }
+      }
+
+      ul {
+        margin-left: 15px;
+
+        li {
+          padding-left: 15px;
+        }
+      }
+    }
+  }
+}

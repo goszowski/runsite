@@ -7,7 +7,7 @@
           {{csrf_field()}}
           {{method_field('PATCH')}}
           @include('runsite::page-builder.form')
-          <button type="submit" class="btn btn-primary rippler rippler-default"><i class="fa fa-check"></i> Update</button>
+          <button type="submit" class="btn btn-primary rippler rippler-default"><i class="icofont icofont-check"></i> Update</button>
         </form>
       </div>
     </div>

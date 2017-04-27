@@ -4,7 +4,12 @@ namespace Goszowski\Runsite\Models\Model;
 
 use Illuminate\Database\Eloquent\Model as Eloquent;
 use Carbon\Carbon;
+use DateTime;
 use Artisan;
+
+use Facades\ {
+  Goszowski\Stub\Stub
+};
 
 class Model extends Eloquent
 {
@@ -64,7 +69,7 @@ class Model extends Eloquent
         return parent::query()->create($attributes);
       }
 
-      $dateNow = Carbon::now()->format('Y_m_d_His');
+      $dateNow = (new DateTime)->format('Y_m_d_His').microtime(true);
       $modelName = array_get($attributes, 'name');
       $fileName = $dateNow . '_create_model_' . $modelName . '.php';
       $migrationName = 'CreateModel' . studly_case($modelName);
@@ -85,17 +90,32 @@ class Model extends Eloquent
           $fields .= '            $table->'.$fieldOptions['type'].'(\''.$fieldName.'\')';
           if($fieldOptions['references'])
           {
-            $fields .= '->references(\''.$fieldOptions['references']['field_name'].'\')->on(\''.$fieldOptions['references']['table_name'].'\')';
+            $fields .= '->unsigned()';
           }
           $fields .= ";\n";
       }
 
-      $migration = file_get_contents(__DIR__ . '/../../resources/stubs/migrations/model/create.stub');
-      $migration = str_replace('%%MigrationName%%', $migrationName, $migration);
-      $migration = str_replace('%%modelFields%%', $modelFields, $migration);
-      $migration = str_replace('%%TableName%%', str_plural($modelName), $migration);
-      $migration = str_replace('%%Fields%%', $fields, $migration);
-      file_put_contents(database_path('/migrations/') . $fileName, $migration);
+      $indexes = '';
+      foreach($model->defaultFields as $fieldName=>$fieldOptions)
+      {
+          if($fieldOptions['references'])
+          {
+            $indexes .= '            $table->foreign(\''.$fieldName.'\')->references(\''.$fieldOptions['references']['field_name'].'\')->on(\''.$fieldOptions['references']['table_name'].'\')->onDelete(\'cascade\')'.";\n";
+          }
+      }
+
+      $stub = Stub::load(__DIR__ . '/../../resources/stubs/migrations/model/create.stub');
+
+      $stub->replace([
+        'MigrationName' => $migrationName,
+        'modelFields' => $modelFields,
+        'TableName' => str_plural($modelName),
+        'Fields' => $fields,
+        'Indexes' => $indexes,
+        'ModelName' => $modelName,
+      ]);
+
+      $stub->store(database_path('/migrations'), $fileName);
 
       return Artisan::call('migrate');
     }

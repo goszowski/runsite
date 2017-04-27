@@ -27,11 +27,11 @@
                     @endif
                   @endforeach
                   <td>
-                    <a href="{{route('runsite.'.$crudRoute.'.edit', $item->id)}}" class="btn btn-xs btn-primary rippler rippler-default" target="runsiteIframe"><i class="fa fa-pencil"></i></a>
+                    <a href="{{route('runsite.'.$crudRoute.'.edit', $item->id)}}" class="btn btn-xs btn-primary rippler rippler-default" target="runsiteIframe"><i class="icofont icofont-edit-alt"></i></a>
                     <form action="{{route('runsite.'.$crudRoute.'.destroy', $item->id)}}" method="post" style="display:inline" target="runsiteIframe">
                       {{csrf_field()}}
                       {{method_field('DELETE')}}
-                      <button type="submit" class="btn btn-xs btn-danger rippler rippler-default" onclick="return confirm('{{trans('runsite::main.Confirm delete')}}?')"><i class="fa fa-trash"></i></button>
+                      <button type="submit" class="btn btn-xs btn-danger rippler rippler-default" onclick="return confirm('{{trans('runsite::main.Confirm delete')}}?')"><i class="icofont icofont-trash"></i></button>
                     </form>
                   </td>
                 </tr>

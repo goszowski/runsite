@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 use Goszowski\Runsite\Models\Model\Model;
+use Goszowski\Runsite\Models\Model\Setting;
+use Goszowski\Runsite\Models\Field\Field;
 
 class %%MigrationName%% extends Migration
 {
@@ -16,13 +18,21 @@ class %%MigrationName%% extends Migration
      */
     public function up()
     {
-        Model::create([
+        $model = Model::create([
 %%modelFields%%        ], true);
+
+        Setting::create([
+            'model_id' => $model->id,
+            'show_in_admin_tree' => true,
+            'use_cache' => false,
+        ]);
 
         Schema::create('%%TableName%%', function (Blueprint $table) {
             $table->increments('id');
 %%Fields%%
             $table->timestamps();
+
+%%Indexes%%
         });
     }
 
@@ -33,6 +43,7 @@ class %%MigrationName%% extends Migration
      */
     public function down()
     {
-
+        Model::where('name', '%%ModelName%%')->delete();
+        Schema::drop('%%TableName%%');
     }
 }
