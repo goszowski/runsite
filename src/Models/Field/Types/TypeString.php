@@ -19,8 +19,18 @@ class TypeString
       return '';
     }
 
-    public function htmlVisualValue()
+    public function visualValue($value)
     {
-      return view('');
+      return view('runsite::page-builder.field-types.text._nodes_view', compact('value'));
+    }
+
+    public function fieldTemplate()
+    {
+      return 'text.nodes.default';
+    }
+
+    public function setValue($value)
+    {
+      return '\'' . str_replace("'", "\'", $value) . '\'';
     }
 }

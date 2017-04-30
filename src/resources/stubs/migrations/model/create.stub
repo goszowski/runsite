@@ -25,6 +25,7 @@ class %%MigrationName%% extends Migration
             'model_id' => $model->id,
             'show_in_admin_tree' => true,
             'use_cache' => false,
+            'migration' => false,
         ]);
 
         Schema::create('%%TableName%%', function (Blueprint $table) {

@@ -7,6 +7,7 @@ use Artisan;
 use Carbon\Carbon;
 use DateTime;
 use Goszowski\Runsite\Models\Model\Model;
+use Goszowski\Runsite\Models\Field\Setting;
 
 
 
@@ -22,7 +23,6 @@ class Field extends Eloquent
 {
     protected $table = 'rs_fields';
     protected $fillable = ['model_id', 'type_id', 'name', 'display_name', 'hint'];
-    protected $modelsPath = '\Goszowski\Runsite\Models';
 
     public $types = [
       1 => TypeInteger::class,
@@ -30,18 +30,22 @@ class Field extends Eloquent
       3 => TypeDecimal::class,
       4 => TypeBoolean::class,
       5 => TypeString::class,
-
     ];
 
     public function settings()
     {
-      return $this->hasOne($this->modelsPath.'\Field\Setting', 'field_id');
+      return $this->hasOne(Setting::class, 'field_id');
+    }
+
+    public function type()
+    {
+      return $this->types[$this->type_id];
     }
 
 
-    public static function create(array $attributes = [], $inDatabase = false)
+    public static function create(array $attributes = [], $dbInsert = false)
     {
-      if($inDatabase)
+      if($dbInsert)
       {
         return parent::query()->create($attributes);
       }

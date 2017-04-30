@@ -19,8 +19,13 @@ class TypeFloat
       return 0;
     }
 
-    public function htmlVisualValue()
+    public function visualValue($value)
     {
       return view('');
+    }
+
+    public function fieldTemplate()
+    {
+      return 'text.default';
     }
 }

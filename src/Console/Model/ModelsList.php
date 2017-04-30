@@ -5,10 +5,10 @@ namespace Goszowski\Runsite\Console\Model;
 use Illuminate\Console\Command;
 use Goszowski\Runsite\Models\Model\Model;
 
-class Lists extends Command
+class ModelsList extends Command
 {
 
-    protected $signature = 'model:lists';
+    protected $signature = 'model:list';
     protected $description = 'Listing models';
 
     public function handle()

@@ -40,7 +40,7 @@ class RunsiteServiceProvider extends ServiceProvider
 
         $this->commands([
             Console\Setup\Setup::class,
-            Console\Model\Lists::class,
+            Console\Model\ModelsList::class,
         ]);
     }
 }

@@ -16,11 +16,22 @@ class TypeBoolean
 
     public function defaultValue()
     {
-      return false;
+      return true;
     }
 
-    public function htmlVisualValue()
+    public function visualValue($value)
     {
-      return view('');
+      $value = $value ? '<span class="label label-success">Yes</span>' : '<span class="label label-danger">No</span>';
+      return view('runsite::page-builder.field-types.checkbox._nodes_view', compact('value'));
+    }
+
+    public function fieldTemplate()
+    {
+      return 'checkbox.default';
+    }
+
+    public function setValue($value)
+    {
+      return $value == 'on' ? 'true' : 'false';
     }
 }

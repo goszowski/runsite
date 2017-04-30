@@ -26,6 +26,13 @@ Route::group([
     Route::resource('languages', 'LanguagesController');
     Route::resource('usergroups', 'UserGroupController');
     Route::resource('users', 'UsersController');
+
+    Route::group(['prefix'=>'nodes', 'as'=>'nodes.'], function() {
+      Route::get('/{id}/{model_id?}', ['as' => 'edit',    'uses' => 'NodesController@edit']);
+      Route::patch('/{id}', ['as' => 'update', 'uses' => 'NodesController@update']);
+      Route::get('/{parent_id}/{model_id}/create', ['as' => 'create', 'uses' => 'NodesController@create']);
+      Route::post('/', ['as' => 'store', 'uses' => 'NodesController@store']);
+    });
     // Route::group(['prefix' => 'models'], function() {
     //   Route::get('/',           ['as' => 'runsite.models.index',    'uses' => 'ModelsController@index']);
     //   Route::get('/create',     ['as' => 'runsite.models.create',   'uses' => 'ModelsController@create']);

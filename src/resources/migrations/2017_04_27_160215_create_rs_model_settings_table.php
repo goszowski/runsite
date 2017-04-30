@@ -18,6 +18,7 @@ class CreateRsModelSettingsTable extends Migration
             $table->integer('model_id')->unsigned();
             $table->boolean('show_in_admin_tree');
             $table->boolean('use_cache');
+            $table->boolean('migration');
             $table->timestamps();
 
             $table->foreign('model_id')

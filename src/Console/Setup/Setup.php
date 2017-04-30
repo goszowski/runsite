@@ -15,6 +15,8 @@ use Goszowski\Runsite\Console\Setup\Steps\CreateAdminUser;
 use Goszowski\Runsite\Console\Setup\Steps\ArtisanVendorPublish;
 use Goszowski\Runsite\Console\Setup\Steps\CreateIndexModel;
 use Goszowski\Runsite\Console\Setup\Steps\CreateDefaultFieldsOfIndexModel;
+use Goszowski\Runsite\Console\Setup\Steps\CreateIndexNode;
+use Goszowski\Runsite\Console\Setup\Steps\CreateLanguage;
 
 class Setup extends Command
 {
@@ -24,7 +26,7 @@ class Setup extends Command
 
     protected $database = '';
 
-    protected $sleep = 150000;
+    protected $sleep = 100000;
     protected $steps = [
       TruncateAppMigrationsFolder::class,
       RewriteAppConfig::class,
@@ -35,6 +37,8 @@ class Setup extends Command
       ArtisanVendorPublish::class,
       CreateIndexModel::class,
       CreateDefaultFieldsOfIndexModel::class,
+      CreateLanguage::class,
+      CreateIndexNode::class,
       ArtisanMigrate::class,
     ];
 

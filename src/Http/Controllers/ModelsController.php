@@ -4,6 +4,7 @@ namespace Goszowski\Runsite\Http\Controllers;
 
 use Goszowski\Runsite\Http\Controllers\RunsiteController;
 use Goszowski\Runsite\Models\Model\Model;
+use Goszowski\Runsite\Models\Field\Field;
 use Goszowski\Runsite\Helpers\Alert;
 use Illuminate\Http\Request;
 use Facades\ {
@@ -44,6 +45,16 @@ class ModelsController extends RunsiteController
         ]);
 
         Model::create($request->all());
+
+        $model = Model::where('name', array_get($request->all(), 'name'))->first();
+
+        Field::create([
+          'model_id' => $model->id,
+          'type_id' => 4,
+          'name' => 'is_active',
+          'display_name' => 'Active',
+          'hint' => '',
+        ]);
 
         Alert::success(trans('runsite::main.created_successful'));
 

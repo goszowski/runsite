@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
 use Carbon\Carbon;
 use DateTime;
 use Artisan;
+use Goszowski\Runsite\Models\Model\Setting;
+use Goszowski\Runsite\Models\Field\Field;
 
 use Facades\ {
   Goszowski\Stub\Stub
@@ -31,6 +33,7 @@ class Model extends Eloquent
           'references' => [
             'field_name' => 'id',
             'table_name' => 'rs_nodes',
+            'nullable' => false,
           ],
         ],
 
@@ -39,6 +42,7 @@ class Model extends Eloquent
           'references' => [
             'field_name' => 'id',
             'table_name' => 'rs_nodes',
+            'nullable' => true,
           ],
         ],
 
@@ -47,6 +51,7 @@ class Model extends Eloquent
           'references' => [
             'field_name' => 'id',
             'table_name' => 'rs_languages',
+            'nullable' => false,
           ],
         ],
 
@@ -59,7 +64,12 @@ class Model extends Eloquent
 
     public function settings()
     {
-      return $this->belongsTo('\Goszowski\Runsite\Models\Model\Setting');
+      return $this->belongsTo(Setting::class);
+    }
+
+    public function fields()
+    {
+      return $this->hasMany(Field::class)->get();
     }
 
     public static function create(array $attributes = [], $inDatabase = false)
@@ -90,7 +100,8 @@ class Model extends Eloquent
           $fields .= '            $table->'.$fieldOptions['type'].'(\''.$fieldName.'\')';
           if($fieldOptions['references'])
           {
-            $fields .= '->unsigned()';
+            $fields .= $fieldOptions['references']['nullable'] ? '->nullable()' : null;
+            $fields .=  '->unsigned()';
           }
           $fields .= ";\n";
       }

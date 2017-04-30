@@ -1,0 +1,37 @@
+<?php
+
+// This migration was generated from Goszowski/Runsite package
+
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+use Goszowski\Runsite\Models\Node\Node;
+use Goszowski\Runsite\Models\Model\Model;
+
+class %%MigrationName%% extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        $model = Model::where('name', '%%ModelName%%')->first();
+        Node::create([
+          'parent_id' => %%ParentId%%,
+          'model_id' => $model->id,
+%%Fields%%
+        ], true);
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+
+    }
+}

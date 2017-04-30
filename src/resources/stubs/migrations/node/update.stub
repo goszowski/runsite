@@ -1,0 +1,40 @@
+<?php
+
+// This migration was generated from Goszowski/Runsite package
+
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+use Goszowski\Runsite\Models\Dynamic;
+use Goszowski\Runsite\Models\Language;
+use Goszowski\Runsite\Models\Node\Path;
+
+class %%MigrationName%% extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        $path = Path::where('name', '%%PathName%%')->orderBy('created_at', 'desc')->first();
+        $dynamic = new Dynamic(str_plural('%%ModelName%%'));
+        $language = Language::where('locale', '%%LanguageLocale%%')->first();
+        $dynamic = $dynamic->where('node_id', $path->node->id)->where('language_id', $language->id)->first();
+
+%%Fields%%
+
+        $dynamic->save([], true);
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+
+    }
+}

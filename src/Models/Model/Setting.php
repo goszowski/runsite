@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
 class Setting extends Eloquent
 {
     protected $table = 'rs_model_settings';
-    protected $fillable = ['model_id', 'show_in_admin_tree', 'use_cache'];
+    protected $fillable = ['model_id', 'show_in_admin_tree', 'use_cache', 'migration'];
 
     public function model()
     {

@@ -11,6 +11,6 @@ class Path extends Eloquent
 
     public function node()
     {
-        return $this->belongsTo('Goszowski\Runsite\Models\Node', 'node_id');
+        return $this->belongsTo('Goszowski\Runsite\Models\Node\Node', 'node_id');
     }
 }
